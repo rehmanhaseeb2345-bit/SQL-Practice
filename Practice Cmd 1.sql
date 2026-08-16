@@ -142,3 +142,40 @@ FROM products
 GROUP BY 
 		products.department
 HAVING COUNT(*) > 1;
+
+SELECT 
+	orders.user_id,
+	COUNT(*)
+FROM orders
+GROUP BY 
+	orders.user_id
+HAVING 
+ 	COUNT(*) > 2;
+
+    SELECT 
+    products.department,
+    FLOOR(AVG(price)) AS avg_price_floor
+FROM products
+GROUP BY products.department
+HAVING FLOOR(AVG(price)) > 50;   
+
+SELECT 
+    users.city,
+	COUNT(*)
+FROM users
+GROUP BY users.city
+HAVING COUNT(*) > 2;   
+
+-- 6th Section
+
+SELECT 
+    orders.id,
+	users.first_name
+FROM users
+JOIN orders ON orders.id = users.id;
+
+SELECT 
+    orders.id,
+	products.name
+FROM products
+JOIN orders ON orders.id = products.id;
