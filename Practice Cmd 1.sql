@@ -179,3 +179,64 @@ SELECT
 	products.name
 FROM products
 JOIN orders ON orders.id = products.id;
+
+SELECT 
+    orders.id,
+	products.name,
+	products.price
+FROM products
+JOIN orders ON orders.id = products.id;
+
+SELECT 
+    users.first_name,
+	products.name
+FROM orders
+JOIN users ON users.id = orders.user_id 
+JOIN products ON products.id = orders.product_id;
+
+SELECT 
+    users.first_name,
+	products.name,
+	orders.paid
+FROM orders
+JOIN users ON users.id = orders.user_id 
+JOIN products ON products.id = orders.product_id;
+
+SELECT 
+    users.first_name,
+	products.name,
+	orders.quantity,
+	orders.paid
+FROM orders
+JOIN users ON users.id = orders.user_id 
+JOIN products ON products.id = orders.product_id
+WHERE orders.paid = true;
+
+-- This is working too
+SELECT 
+	users.first_name,
+	orders.quantity,
+FROM orders
+JOIN users ON users.id = orders.user_id;
+
+SELECT 
+    users.first_name,
+    products.name,
+    SUM(orders.quantity * products.price) AS spent_on_product
+FROM orders
+JOIN users ON users.id = orders.user_id
+JOIN products ON products.id = orders.product_id
+GROUP BY users.id, users.first_name, products.id, products.name;   
+
+SELECT 
+	products.department,
+	SUM (products.price * orders.quantity)
+FROM orders
+JOIN products ON products.id = orders.product_id
+GROUP BY products.department
+
+ELECT SUM(products.price * orders.quantity)
+FROM orders
+JOIN products ON products.id = orders.product_id
+WHERE orders.paid = true;
+
